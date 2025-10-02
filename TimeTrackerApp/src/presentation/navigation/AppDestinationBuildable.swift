@@ -30,12 +30,24 @@ enum AppDestinationBuilder: AppDestinationBuildable {
                 container: container,
                 context: SplashViewContext()
             ))
+        case .dashboard:
+            return AnyView(
+                DashboardBuilder.build(
+                    container: container,
+                    context: DashboardViewContext()
+                )
+            )
         case .addTime:
             return AnyView(VStack{})
         case .settings:
             return AnyView(VStack{})
         case .auth:
-            return AnyView(VStack{})
+            return AnyView(
+                AuthBuilder.build(
+                    container: container,
+                    context: AuthViewContext()
+                )
+            )
         }
     }
 }

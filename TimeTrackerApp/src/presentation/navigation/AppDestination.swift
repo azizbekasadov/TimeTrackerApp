@@ -12,6 +12,7 @@ public enum AppDestination: String, Hashable, Identifiable {
     case settings
     case auth
     case splash
+    case dashboard 
 //    case onboarding
     
     public var id: String {

@@ -20,6 +20,7 @@ public protocol Routing: AnyObject {
 
 @MainActor @Observable
 public class AppRouter: Routing {
+    var currentUser: Employee?
     
     @ObservationIgnored
     public var navigationPath: NavigationPath
