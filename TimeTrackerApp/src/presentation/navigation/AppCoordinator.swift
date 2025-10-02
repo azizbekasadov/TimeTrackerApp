@@ -37,8 +37,7 @@ struct AppCoordinator: View {
                     AppDestinationBuilder.build(destination, with: container)
                 }
             } else {
-//                SplashBuilder.build(container: container, context: SplashViewContext())
-                VStack{}
+                 AppDestinationBuilder.build(.splash, with: container)
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .didFinishBooststrapInSplash)) { output in

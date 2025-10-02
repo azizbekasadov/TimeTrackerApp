@@ -11,6 +11,7 @@ public enum AppDestination: String, Hashable, Identifiable {
     case addTime
     case settings
     case auth
+    case splash
 //    case onboarding
     
     public var id: String {

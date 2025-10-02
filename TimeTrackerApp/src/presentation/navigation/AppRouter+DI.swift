@@ -8,7 +8,12 @@
 import Factory
 
 public extension Container {
-    var appRouter: Factory<AppRouter> {
-        self { AppRouter() }.scope(.singleton)
+  
+  var appRouter: Factory<AppRouter> {
+        self { @MainActor in
+            AppRouter()
+        }
+        .scope(.singleton)
     }
+  
 }

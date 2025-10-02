@@ -25,6 +25,11 @@ enum AppDestinationBuilder: AppDestinationBuildable {
         with container: Container
     ) -> AnyView {
         switch destination {
+        case .splash:
+            return AnyView(SplashBuilder.build(
+                container: container,
+                context: SplashViewContext()
+            ))
         case .addTime:
             return AnyView(VStack{})
         case .settings:

@@ -18,7 +18,7 @@ public protocol Routing: AnyObject {
     func navigate(_ direction: RouteDirection)
 }
 
-@Observable
+@MainActor @Observable
 public class AppRouter: Routing {
     
     @ObservationIgnored

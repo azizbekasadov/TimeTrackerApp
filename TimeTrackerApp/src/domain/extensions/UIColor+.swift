@@ -50,3 +50,8 @@ public extension Color {
         }
     }
 }
+
+extension Color {
+    static let appPrimary: Color = Color("#88BC42")
+    static let appBackground: Color = Color("#191D18")
+}
