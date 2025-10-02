@@ -34,7 +34,7 @@ public struct SplashView: View {
                 await viewModel.onAppear()
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation(.smooth) {
                     viewModel.didFinishLoading()
                 }

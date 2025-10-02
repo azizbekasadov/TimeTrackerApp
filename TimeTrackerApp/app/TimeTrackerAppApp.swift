@@ -13,6 +13,21 @@ import SwiftData
 struct TimeTrackerAppApp: App {
     private let container = Container()
     
+    var body: some Scene {
+        WindowGroup {
+            AppCoordinator(container: container)
+                .modelContainer(ModelContainerManager.shared.sharedModelContainer)
+        }
+    }
+}
+
+extension EnvironmentValues {
+    @Entry public var modelContext: ModelContext = ModelContainerManager.shared.sharedModelContainer.mainContext
+}
+
+struct ModelContainerManager {
+    static let shared = ModelContainerManager()
+    
     private(set) var sharedModelContainer: ModelContainer = {
         let schema = Schema([Employee.self, Project.self, TimeEntry.self])
         let config = ModelConfiguration(isStoredInMemoryOnly: false)
@@ -21,10 +36,5 @@ struct TimeTrackerAppApp: App {
         return container
     }()
     
-    var body: some Scene {
-        WindowGroup {
-            AppCoordinator(container: container)
-                .modelContainer(sharedModelContainer)
-        }
-    }
+    private init() {}
 }
