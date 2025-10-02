@@ -96,6 +96,15 @@ struct DashboardView: View {
         }
         .padding()
         .navigationTitle("Dashboard")
+        .toolbar {
+            Button {
+                viewModel.showSettings()
+            } label: {
+                Image(systemName: "gearshape")
+                    .foregroundStyle(.primary)
+            }
+
+        }
     }
 
     private func weekDayAbbrev(_ date: Date) -> String {

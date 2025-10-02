@@ -40,7 +40,12 @@ enum AppDestinationBuilder: AppDestinationBuildable {
         case .addTime:
             return AnyView(VStack{})
         case .settings:
-            return AnyView(VStack{})
+            return AnyView(
+                SettingsBuilder.build(
+                    container: container,
+                    context: SettingsViewContext()
+                )
+            )
         case .auth:
             return AnyView(
                 AuthBuilder.build(

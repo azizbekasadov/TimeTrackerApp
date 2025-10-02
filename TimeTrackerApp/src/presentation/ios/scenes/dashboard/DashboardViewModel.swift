@@ -40,4 +40,8 @@ final class DashboardViewModel {
         let r = c.range(for: period, containing: selectedDate)
         return (r.start, r.end)
     }
+    
+    func showSettings() {
+        router.present(.settings)
+    }
 }
