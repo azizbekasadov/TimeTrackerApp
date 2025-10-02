@@ -8,27 +8,27 @@
 import SwiftUI
 import Observation
 
-public enum RouteDirection {
+ enum RouteDirection {
     case pop
     case push(destination: AppDestination)
     case root
 }
 
-public protocol Routing: AnyObject {
+ protocol Routing: AnyObject {
     func navigate(_ direction: RouteDirection)
 }
 
 @MainActor @Observable
-public class AppRouter: Routing {
+ class AppRouter: Routing {
     var currentUser: Employee?
     
     @ObservationIgnored
-    public var navigationPath: NavigationPath
-    public var toolBarHiden: Bool
+     var navigationPath: NavigationPath
+     var toolBarHiden: Bool
     
-    public var fullCover: AppDestination?
+    var fullCover: AppDestination?
     
-    public init(
+     init(
         _ navigationPath: NavigationPath = .init(),
         toolBarHiden: Bool = false
     ) {
@@ -36,7 +36,7 @@ public class AppRouter: Routing {
         self.toolBarHiden = toolBarHiden
     }
     
-    public func navigate(_ direction: RouteDirection) {
+     func navigate(_ direction: RouteDirection) {
         switch direction {
         case .pop:
             navigationPath.removeLast()
@@ -47,11 +47,17 @@ public class AppRouter: Routing {
         }
     }
     
-    public func present(_ destination: AppDestination) {
+     func present(_ destination: AppDestination) {
+        if destination == .main {
+            NotificationCenter.default.post(name: .didFinishBooststrapInSplash, object: nil)
+//            fullCover = destination
+            return
+        }
+        
         fullCover = destination
     }
     
-    public func dismiss() {
+     func dismiss() {
         fullCover = nil
     }
 }

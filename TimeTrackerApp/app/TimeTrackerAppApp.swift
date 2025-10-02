@@ -33,9 +33,26 @@ struct ModelContainerManager {
         let schema = Schema([Employee.self, Project.self, TimeEntry.self])
         let config = ModelConfiguration(isStoredInMemoryOnly: false)
         let container = try! ModelContainer(for: schema, configurations: config)
-//        Seed.runIfNeeded(in: container)
+        Seed.runIfNeeded(in: container)
         return container
     }()
     
     private init() {}
+    
+    // CRUD
+    func delete<T: PersistentModel>(_ entity: T) {
+        sharedModelContainer.mainContext.delete(entity)
+        try? sharedModelContainer.mainContext.save()
+    }
+    
+    func fetch<T: PersistentModel>(
+        predicate: Predicate<T>? = nil,
+        sortDescriptors: [SortDescriptor<T>] = []
+    ) -> [T] {
+        let fetchDescriptor = FetchDescriptor(
+            predicate: predicate,
+            sortBy: sortDescriptors
+        )
+        return try! sharedModelContainer.mainContext.fetch(fetchDescriptor)
+    }
 }

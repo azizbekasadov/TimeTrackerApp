@@ -13,7 +13,12 @@ struct UserManager {
     
     var currentUser: Employee?
     
-    private init() {}
+    private init() {
+        if let currentId = UserDefaults.standard.string(forKey: "currentEmployeeID") {
+            let employees: [Employee] = ModelContainerManager.shared.fetch()
+            self.currentUser = employees.first(where: { $0.id.uuidString == currentId })
+        }
+    }
 }
 
 extension Container {

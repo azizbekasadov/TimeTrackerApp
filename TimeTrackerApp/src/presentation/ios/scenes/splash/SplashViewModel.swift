@@ -10,7 +10,7 @@ import Factory
 import Foundation
 import Observation
 
-public protocol SplashViewModelable: AnyObject {
+ protocol SplashViewModelable: AnyObject {
     func onAppear() async
     func bootstrap() async
     func didFinishLoading()
@@ -23,22 +23,22 @@ public protocol SplashViewModelable: AnyObject {
 }
 
 @Observable
-public final class SplashViewModel: SplashViewModelable {
+ final class SplashViewModel: SplashViewModelable {
     private let router: AppRouter
     
-    public var isFinished: Bool = false
-    public var isLoaded: Bool = false
-    public var shouldShowError: Bool = false
+     var isFinished: Bool = false
+     var isLoaded: Bool = false
+     var shouldShowError: Bool = false
     
-    public var error: SplashError?
+     var error: SplashError?
     
-    public init(
+    init(
         router: AppRouter
     ) {
         self.router = router
     }
     
-    public func onAppear() async {
+     func onAppear() async {
         // TODO:
         // - add metrics loader
         withAnimation(.easeOut) {
@@ -47,12 +47,12 @@ public final class SplashViewModel: SplashViewModelable {
     }
     
     // load dependencies and preload data if needed
-    public func bootstrap() async {
+     func bootstrap() async {
         // TODO:
         // - setup loaders for the root dependencies of the app;
     }
     
-    public func didFinishLoading() {
+     func didFinishLoading() {
         self.isFinished = true
         
         NotificationCenter.default.post(name: .didFinishBooststrapInSplash, object: nil)
