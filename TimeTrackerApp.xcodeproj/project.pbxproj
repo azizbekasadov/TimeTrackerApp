@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5D24ACAA2E8E67A6005AB08F /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 5D24ACA92E8E67A6005AB08F /* Factory */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		5D24AB692E8E655C005AB08F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D24ACAA2E8E67A6005AB08F /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = TimeTrackerApp;
 			packageProductDependencies = (
+				5D24ACA92E8E67A6005AB08F /* Factory */,
 			);
 			productName = TimeTrackerApp;
 			productReference = 5D24AB592E8E655B005AB08F /* TimeTrackerApp.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 5D24AB502E8E655B005AB08F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5D24ACA82E8E67A6005AB08F /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5D24AB5A2E8E655B005AB08F /* Products */;
 			projectDirPath = "";
@@ -578,6 +587,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5D24ACA82E8E67A6005AB08F /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5D24ACA92E8E67A6005AB08F /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D24ACA82E8E67A6005AB08F /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5D24AB512E8E655B005AB08F /* Project object */;
 }
