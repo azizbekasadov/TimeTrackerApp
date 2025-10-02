@@ -25,7 +25,7 @@ struct AppCoordinator: View {
         Group {
             if isFinishedColdLoading {
                 NavigationStack(path: $router.navigationPath) {
-                    Group {
+Group {
                         if container.userManager().currentUser == nil {
                             AppDestinationBuilder.build(.auth, with: container)
                         } else {
