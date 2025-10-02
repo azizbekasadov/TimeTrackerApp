@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import Factory
 import SwiftData
 
 @main
 struct TimeTrackerAppApp: App {
+    private let container = Container()
     
     var body: some Scene {
         WindowGroup {
-            VStack{}
+            AppCoordinator(container: container)
         }
     }
 }
