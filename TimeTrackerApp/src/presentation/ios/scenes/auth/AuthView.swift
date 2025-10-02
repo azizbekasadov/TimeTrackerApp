@@ -26,6 +26,8 @@ struct AuthView: View {
             TextField(text: $viewModel.username) {
                 Text("Username")
             }
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
             .textFieldStyle(.plain)
             .padding(.vertical, 10)
             .padding(.horizontal)
@@ -61,16 +63,27 @@ struct AuthView: View {
     @ViewBuilder
     private func SignInButtonView() -> some View {
         Button {
-            
+            Task {
+                await viewModel.login()
+            }
         } label: {
-            Text("Sign in")
-                .font(.headline)
-                .bold()
-                .foregroundStyle(Color.white)
-                .padding(12)
+            if viewModel.isLoading {
+                ProgressView()
+                    .foregroundStyle(Color.white)
+                    .progressViewStyle(.circular)
+                    .padding(12)
+            } else {
+                Text("Sign in")
+                    .font(.headline)
+                    .bold()
+                    .foregroundStyle(Color.white)
+                    .padding(12)
+            }
         }
         .frame(maxWidth: .infinity)
         .background(Color.appBackground)
+        .disabled(viewModel.username.isEmpty && viewModel.password.isEmpty)
+        .opacity(viewModel.username.isEmpty && viewModel.password.isEmpty ? 0.5 : 1)
         .clipShape(RoundedRectangle(cornerRadius: 12))
 
     }
@@ -107,7 +120,14 @@ struct AuthView: View {
                             TitlesView()
                             TextFieldsView()
                             SignInButtonView()
-                                                    
+                            
+                            if let error = viewModel.error, !error.isEmpty {
+                                Text(error)
+                                    .foregroundStyle(.red)
+                                    .font(.caption)
+                                    .multilineTextAlignment(.center)
+                            }
+                            
                             Text("By tapping Sign in, you agree to our Terms of Service and Privacy Policy.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)

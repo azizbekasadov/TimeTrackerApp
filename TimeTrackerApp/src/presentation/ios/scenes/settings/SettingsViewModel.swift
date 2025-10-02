@@ -21,4 +21,8 @@ final class SettingsViewModel {
         self.router = router
         self.container = container
     }
+    
+    func dismiss() {
+        router.dismiss()
+    }
 }

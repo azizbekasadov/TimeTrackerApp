@@ -7,15 +7,31 @@
 
 import Foundation
 
-public enum AppDestination: String, Hashable, Identifiable {
+enum AppDestination: Hashable, Identifiable {
     case addTime
     case settings
     case auth
     case splash
-    case dashboard 
-//    case onboarding
+    case dashboard
+    case main
+    case entryForm(entry: TimeEntry?)
     
-    public var id: String {
-        self.rawValue
+    var id: String {
+        switch self {
+        case .addTime:
+            return "addTime"
+        case .settings:
+            return "settings"
+        case .auth:
+            return "auth"
+        case .splash:
+            return "splash"
+        case .dashboard:
+            return "dashboard"
+        case .main:
+            return "main"
+        case .entryForm:
+            return "entryForm"
+        }
     }
 }

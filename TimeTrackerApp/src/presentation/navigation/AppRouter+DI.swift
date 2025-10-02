@@ -7,7 +7,7 @@
 
 import Factory
 
-public extension Container {
+extension Container {
   
   var appRouter: Factory<AppRouter> {
         self { @MainActor in

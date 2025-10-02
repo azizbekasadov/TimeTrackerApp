@@ -37,8 +37,25 @@ enum AppDestinationBuilder: AppDestinationBuildable {
                     context: DashboardViewContext()
                 )
             )
+        case .main:
+            return AnyView(
+                NavigationStack(root: {
+                    MainViewBuilder.build(
+                        container: container,
+                        context: MainViewContext()
+                    )
+                })
+            )
         case .addTime:
-            return AnyView(VStack{})
+            return AnyView(
+                EntryFormView(
+                    viewModel: EntryFormViewModel(
+                        router: container.appRouter(),
+                        container: container,
+                        existing: nil
+                    )
+                )
+            )
         case .settings:
             return AnyView(
                 SettingsBuilder.build(
@@ -51,6 +68,16 @@ enum AppDestinationBuilder: AppDestinationBuildable {
                 AuthBuilder.build(
                     container: container,
                     context: AuthViewContext()
+                )
+            )
+        case .entryForm(let entry):
+            return AnyView(
+                EntryFormView(
+                    viewModel: EntryFormViewModel(
+                        router: container.appRouter(),
+                        container: container,
+                        existing: entry
+                    )
                 )
             )
         }

@@ -27,6 +27,8 @@ final class AuthViewModel: AuthViewModelable {
     @ObservationIgnored
     @AppStorage("lastUsername") private var lastUsername: String = ""
     
+    var isLoading = false
+    
     var username: String = ""
     var password: String = ""
     var error: String? = nil
@@ -46,6 +48,7 @@ final class AuthViewModel: AuthViewModelable {
     
     @MainActor
     func login() async {
+        isLoading = true
         do {
             let descriptor = FetchDescriptor<Employee>(
                 predicate: #Predicate {
@@ -55,16 +58,26 @@ final class AuthViewModel: AuthViewModelable {
             
             let results = try ModelContainerManager.shared.sharedModelContainer.mainContext.fetch(descriptor)
             
-            guard let user = results.first, user.password == password else {
+            guard let user = results.first(where: { $0.username == self.username }), user.password == password else {
                 error = "Invalid credentials"
+                isLoading = false
                 return
             }
             
             lastUsername = username
             router.currentUser = user
-            router.navigate(.root)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.isLoading = false
+                
+                UserDefaults.standard.set(user.id.uuidString, forKey: "currentEmployeeID")
+                
+                self.router.dismiss()
+                self.router.present(.main)
+            }
         } catch {
             self.error = error.localizedDescription
+            isLoading = false
         }
     }
 }

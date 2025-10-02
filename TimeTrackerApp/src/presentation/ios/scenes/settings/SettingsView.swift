@@ -41,7 +41,7 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .toolbar {
                 Button("Dismiss") {
-                    dismiss.callAsFunction()
+                    viewModel.dismiss()
                 }
             }
         }
