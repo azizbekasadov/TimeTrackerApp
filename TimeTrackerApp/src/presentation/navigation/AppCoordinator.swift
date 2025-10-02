@@ -25,7 +25,13 @@ struct AppCoordinator: View {
         Group {
             if isFinishedColdLoading {
                 NavigationStack(path: $router.navigationPath) {
-                    AppDestinationBuilder.build(.auth, with: container)
+Group {
+                        if container.userManager().currentUser == nil {
+                            AppDestinationBuilder.build(.auth, with: container)
+                        } else {
+                            AppDestinationBuilder.build(.dashboard, with: container)
+                        }
+                    }
                     .navigationBarTitleDisplayMode(.large)
                     .navigationViewStyle(.stack)
                     .navigationDestination(for: AppDestination.self) { destination in
