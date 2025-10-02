@@ -13,7 +13,6 @@ import SwiftData
 struct TimeTrackerAppApp: App {
     private let container = Container()
     
-    
     var body: some Scene {
         WindowGroup {
             AppCoordinator(container: container)
