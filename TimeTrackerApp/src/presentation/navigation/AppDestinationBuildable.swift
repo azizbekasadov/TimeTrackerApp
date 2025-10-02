@@ -35,7 +35,12 @@ enum AppDestinationBuilder: AppDestinationBuildable {
         case .settings:
             return AnyView(VStack{})
         case .auth:
-            return AnyView(VStack{})
+            return AnyView(
+                AuthBuilder.build(
+                    container: container,
+                    context: AuthViewContext()
+                )
+            )
         }
     }
 }
